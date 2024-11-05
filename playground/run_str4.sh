@@ -1,4 +1,4 @@
-OUTPUT_DIR="z3str4-$2-"$1
+OUTPUT_DIR="z3str4-"$1
 if [ ! -d  $OUTPUT_DIR ]; then
   mkdir $OUTPUT_DIR
 fi
@@ -13,7 +13,7 @@ TIME_TEMP=$(mktemp)
 
 while IFS= read -r smt2_file; do
   echo "$smt2_file"
-  OUT=$(/usr/bin/time -f "%e" -o $TIME_TEMP timeout 120s ./z3 parallel.enable=true parallel.threads.max=$1 smt.string_solver=z3str3 smt.str.tactic=3probe "$smt2_file"  2>"$ERR_TEMP")
+  OUT=$(/usr/bin/time -f "%e" -o $TIME_TEMP timeout 120s ./z3str4 parallel.enable=true parallel.threads.max=$1 smt.string_solver=z3str3 smt.str.tactic=3probe "$smt2_file"  2>"$ERR_TEMP")
   ERR=$(cat "$ERR_TEMP")
   TIME_USED=$(cat $TIME_TEMP)
   RES="unknown"
@@ -28,7 +28,7 @@ while IFS= read -r smt2_file; do
   echo "Out:$OUT" >>"$LOG_FILE"
   echo "Error:$ERR" >> "$LOG_FILE"
   sync
-done < $2.txt
+done < all.txt
 
 rm "$ERR_TEMP"
 rm $TIME_TEMP

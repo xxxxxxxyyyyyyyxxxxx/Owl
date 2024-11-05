@@ -14,7 +14,7 @@ do
   python pred.py $1 $i $2 &
 done
 sleep 5
-OUTPUT_DIR="owl-$2-$3-"$1
+OUTPUT_DIR="z3seq_owl-$2-"$1
 if [ ! -d  $OUTPUT_DIR ]; then
   mkdir $OUTPUT_DIR
 fi
@@ -29,7 +29,7 @@ TIME_TEMP=$(mktemp)
 
 while IFS= read -r smt2_file; do
   echo "$smt2_file"
-  OUT=$(/usr/bin/time -f "%e" -o $TIME_TEMP timeout 120s ./z3-owl parallel.enable=true parallel.threads.max=$1  "$smt2_file"  2>"$ERR_TEMP")
+  OUT=$(/usr/bin/time -f "%e" -o $TIME_TEMP timeout 120s ./z3seq-owl parallel.enable=true parallel.threads.max=$1  "$smt2_file"  2>"$ERR_TEMP")
   ERR=$(cat "$ERR_TEMP")
   TIME_USED=$(cat $TIME_TEMP)
   RES="unknown"
@@ -44,7 +44,7 @@ while IFS= read -r smt2_file; do
   echo "Out:$OUT" >>"$LOG_FILE"
   echo "Error:$ERR" >> "$LOG_FILE"
   sync
-done < $3.txt
+done < all.txt
 
 rm "$ERR_TEMP"
 rm $TIME_TEMP
