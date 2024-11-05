@@ -1,0 +1,6 @@
+[submodule "z3str4"]
+	path = z3str4
+	url = git@github.com:xxxxxxxyyyyyyyxxxxx/z3str4.git
+[submodule "z3seq"]
+	path = z3seq
+	url = git@github.com:xxxxxxxyyyyyyyxxxxx/z3seq.git
