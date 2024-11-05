@@ -28,3 +28,10 @@ cd playground
 #case study for C and N
 ./run_seq_owl.sh 16 C
 ./run_seq_owl.sh 16 N
+
+#draw cactus plot
+python draw_cactus.py 32
+python draw_cactus.py 16
+python draw_cactus.py 8
+python draw_cactus.py 4
+python draw_cactus_TCN.py
