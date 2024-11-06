@@ -1,6 +1,6 @@
 [submodule "z3str4"]
 	path = z3str4
-	url = https://github.com/xxxxxxxyyyyyyyxxxxx/z3seq.git
+	url = https://github.com/xxxxxxxyyyyyyyxxxxx/z3str4.git
 [submodule "z3seq"]
 	path = z3seq
-  url = https://github.com/xxxxxxxyyyyyyyxxxxx/z3str4.git
+	url = https://github.com/xxxxxxxyyyyyyyxxxxx/z3seq.git
