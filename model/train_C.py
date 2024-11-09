@@ -1,24 +1,23 @@
 import itertools
-import random
-from sklearn.model_selection import KFold
-from sklearn.ensemble import RandomForestClassifier
-import numpy as np
-import os
-import joblib
 import json
+import os
+import random
 
+import joblib
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import KFold
 
 input_dir = "z3-data-seq-processed"
 total_data = []
 
 for file in os.listdir(input_dir):
-    with open(os.path.join(input_dir, file), 'r') as f:
-            data = json.load(f)
-            if len(data):
-                total_data.append(data)
-        
+    with open(os.path.join(input_dir, file), "r") as f:
+        data = json.load(f)
+        if len(data):
+            total_data.append(data)
 
-        
+
 kf = KFold(n_splits=5, shuffle=True, random_state=42)
 means = []
 
@@ -33,10 +32,9 @@ for data in total_data:
     Y_train.extend([b for a, b in X_compare])
 
 model = RandomForestClassifier(n_estimators=80, random_state=42, max_features="log2")
-excluded_features = list(range(0,2)) + list(range(5,7)) + list(range(9,16))
 X_array = np.array(X_train)
-X_array = np.delete(X_array, excluded_features, axis=1)
 model.fit(X_array, Y_train)
 
 joblib.dump(model, "C.pkl")
 exit()
+
